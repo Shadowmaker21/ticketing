@@ -1,0 +1,39 @@
+if($run == true){
+    ?>
+        <script>alert('Request Berhasil Disubmit, Mohon Untuk Menunggu ')</script>";
+        <script type='text/javascript'> document.location = 'index.php?page=request'; </script>";
+        <?php
+}else{
+    ?>
+    <script type="text/javascript">
+        alert("Email Tidak Berhasil Dikirim");
+    </script>
+    <?php
+}
+
+<?php
+                $auto1 = "SELECT COUNT(id_req) AS max_code1 FROM request";
+                $hasil1 = mysqli_query($koneksi1,$auto1);
+                $data1 = mysqli_fetch_array($hasil1);
+
+                $max_code1 = $data1['max_code1'];
+
+                $nourut1 = (int) substr($max_code1, 0,3);
+                $nourut1++;
+                                        //035/SK.03/II/2022
+                $char1 = 'NEW';
+
+                $array_bln = array(1=>"I","II","III", "IV", "V","VI","VII","VIII","IX","X", "XI","XII");
+                $bln = $array_bln[date('n')];
+                $thn = gmdate("Y");
+                $kodejadi1 = sprintf("%03s" , $nourut1) .'-'.$char1.""."-".$bln."-".$thn ;
+
+                ?>
+
+
+                <div class="form-group">
+                    <label for="Subjek">No. Tiket</label>
+                    <input class="form-control" name="nomer" type="text" value="<?php echo $kodejadi1 ?>"placeholder="Permintaan User (Etc. : Pembuatan...)" disabled>
+                  </div>
+
+
